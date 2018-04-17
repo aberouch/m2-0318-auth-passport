@@ -2,6 +2,7 @@
 const express = require("express");
 const passport = require("passport");
 const authRoutes = express.Router();
+const ensureLoggedOut = require('../middlewares/ensureLoggedOut');
 
 // User model
 const User = require("../models/User");
@@ -10,7 +11,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
-authRoutes.get("/signup", (req, res, next) => {
+authRoutes.get("/signup", ensureLoggedOut('/specialpage'), (req, res, next) => {
   res.render("auth/signup");
 });
 
@@ -51,7 +52,7 @@ authRoutes.post("/signup", (req, res, next) => {
     });
 });
 
-authRoutes.get("/login", (req, res, next) => {
+authRoutes.get("/login", ensureLoggedOut("/"), (req, res, next) => {
   res.render("auth/login");
 });
 

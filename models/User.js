@@ -4,7 +4,8 @@ const Schema   = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
-  facebookID: String
+  facebookID: String,
+  isAdmin:{type:Boolean, default:false}
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });
